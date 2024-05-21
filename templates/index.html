@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h3>Fake News Detection</h3>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to Fake News Detection</h1>
+        <p>Use the form below to check if a news title is true or fake.</p>
+        <div id="form-container">
+            <form id="news-form" method="post" action="/predict">
+                <label for="title">Enter Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <button type="submit" id="check-btn">Check</button>
+            </form>
+        </div>
+        {% if result %}
+        <div id="result-container">
+            <h2>Result:</h2>
+            <p>The news is: {{ result }}</p>
+        </div>
+        {% endif %}
+    </main>
+    <footer>
+        <p>Copyright @bytanaya</p>
+    </footer>
+</body>
+</html>
