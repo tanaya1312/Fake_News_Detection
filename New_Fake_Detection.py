@@ -19,6 +19,9 @@ data_true['class'] = 1
 # Merge datasets and drop unnecessary columns
 data = pd.concat([data_fake, data_true]).drop(['title', 'subject', 'date'], axis=1).sample(frac=1).reset_index(drop=True)
 
+# Check for NaN values in the 'text' column and fill them with an empty string
+data['text'] = data['text'].fillna('')
+
 # Text preprocessing function
 def wordopt(text):
     text = text.lower()
@@ -66,6 +69,7 @@ def manual_testing(news):
 
     results = {}
     for model, model_name in models:
+        model.fit(xv_train, y_train)  # Ensure each model is fitted before predicting
         prediction = model.predict(news_vectorized)
         results[model_name] = "Fake News" if prediction[0] == 0 else "True News"
     
